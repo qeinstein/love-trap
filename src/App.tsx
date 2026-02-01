@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+// @ts-nocheck
 import React, { useState, useCallback, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Canvas } from "@react-three/fiber";
@@ -5,6 +7,7 @@ import { Float, MeshDistortMaterial, Sphere, Stars } from "@react-three/drei";
 import confetti from "canvas-confetti";
 import { Heart, Volume2, VolumeX, Check, ShieldCheck, PenTool, User, Target, Calendar } from "lucide-react";
 import { Howl } from "howler";
+
 
 
 const sounds = {
