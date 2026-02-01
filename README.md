@@ -55,7 +55,7 @@ The system models the interaction as a **two-party contract**, not a one-sided m
 - Sender (`from`) and Recipient (`to`) are both encoded
 - The success state generates a possessive declaration:
   ```
-  “Oyinda is officially Toheeb’s for the season.”
+  “She is officially Toheeb’s for the season.”
   ```
 
 This framing shifts the experience from “card acceptance” to **mutual acknowledgement**.
@@ -107,7 +107,7 @@ The scene behaves as a slow, breathing system rather than a static background.
 Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/heritage-valentine.git
+git clone https://github.com/qeinstein/love-trap.git
 cd heritage-valentine
 ```
 
