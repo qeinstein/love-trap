@@ -45,7 +45,7 @@ export default function UltimateHeritageValentine() {
   const [muted, setMuted] = useState(false);
   const [copied, setCopied] = useState(false);
 
-  // URL Parsing
+  //URL
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const to = params.get("to");
@@ -58,7 +58,6 @@ export default function UltimateHeritageValentine() {
     }
   }, []);
 
-  // Heartbeat Logic: Audio & Haptics
   useEffect(() => {
     if (!muted && isReceiver && !accepted) {
       sounds.heartbeat.play();
@@ -90,7 +89,7 @@ export default function UltimateHeritageValentine() {
   };
 
   const proceedToStep2 = () => {
-    setTarget({ name: "", gender: "" }); // Clears inheritance from sender
+    setTarget({ name: "", gender: "" }); // Clears inheritance from sender(this shii is annoyinh)
     setStep(2);
   };
 
@@ -234,3 +233,4 @@ const styles: Record<string, React.CSSProperties> = {
   hud: { position: "absolute", top: 20, right: 20, zIndex: 100 },
   iconButton: { background: "rgba(22, 48, 43, 0.05)", border: "none", padding: "10px", borderRadius: "50%", color: "#16302B", cursor: "pointer" }
 };
+// my name is fluxx, 001
