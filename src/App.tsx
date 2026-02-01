@@ -8,8 +8,6 @@ import confetti from "canvas-confetti";
 import { Heart, Volume2, VolumeX, Check, ShieldCheck, PenTool, User, Target, Calendar } from "lucide-react";
 import { Howl } from "howler";
 
-
-
 const sounds = {
   heartbeat: new Howl({ 
     src: ["https://assets.mixkit.co/active_storage/sfx/2358/2358-preview.mp3"], 
@@ -64,7 +62,6 @@ export default function UltimateHeritageValentine() {
   useEffect(() => {
     if (!muted && isReceiver && !accepted) {
       sounds.heartbeat.play();
-      // Increase rate as "No" is clicked
       const newRate = Math.min(1 + noCount * 0.1, 2.5);
       sounds.heartbeat.rate(newRate);
     }
@@ -75,7 +72,6 @@ export default function UltimateHeritageValentine() {
     setNoCount(prev => prev + 1);
     if (!muted) {
       sounds.click.play();
-      // Physical Haptic Pulse on Mobile
       if ("vibrate" in navigator) navigator.vibrate([15, 30, 15]);
     }
     const range = Math.min(150 + noCount * 20, 350);
@@ -93,6 +89,11 @@ export default function UltimateHeritageValentine() {
     });
   };
 
+  const proceedToStep2 = () => {
+    setTarget({ name: "", gender: "" }); // Clears inheritance from sender
+    setStep(2);
+  };
+
   const copyLink = () => {
     const link = `${window.location.origin}/?to=${encodeURIComponent(target.name)}&tg=${target.gender}&from=${encodeURIComponent(sender.name)}`;
     navigator.clipboard.writeText(link);
@@ -106,7 +107,6 @@ export default function UltimateHeritageValentine() {
     <div style={styles.container}>
       <HeritageBackground />
       
-      {/* HEARTBEAT PULSE VIGNETTE */}
       {isReceiver && !accepted && (
         <motion.div
           animate={{ opacity: [0, 0.15 * (1 + noCount * 0.1), 0] }}
@@ -129,14 +129,24 @@ export default function UltimateHeritageValentine() {
               <>
                 <User size={28} color="#8B0000" />
                 <h1 style={styles.title}>The Sender</h1>
-                <input style={styles.input} placeholder="Your Full Name" onChange={(e) => setSender({...sender, name: e.target.value})} />
-                <button disabled={!sender.name} onClick={() => setStep(2)} style={styles.primaryBtn}>Proceed →</button>
+                <input 
+                  style={styles.input} 
+                  placeholder="Your Full Name" 
+                  value={sender.name}
+                  onChange={(e) => setSender({...sender, name: e.target.value})} 
+                />
+                <button disabled={!sender.name} onClick={proceedToStep2} style={styles.primaryBtn}>Proceed →</button>
               </>
             ) : step === 2 ? (
               <>
                 <Target size={28} color="#C5A059" />
                 <h1 style={styles.title}>The Valentine</h1>
-                <input style={styles.input} placeholder="The Recipient's Name" onChange={(e) => setTarget({...target, name: e.target.value})} />
+                <input 
+                  style={styles.input} 
+                  placeholder="The Recipient's Name" 
+                  value={target.name}
+                  onChange={(e) => setTarget({...target, name: e.target.value})} 
+                />
                 <div style={styles.genderRow}>
                   {['m', 'f', 'nb'].map((g) => (
                     <button key={g} onClick={() => setTarget({...target, gender: g})} style={{ ...styles.genderBtn, color: target.gender === g ? '#FDFBF7' : '#16302B', background: target.gender === g ? '#8B0000' : 'transparent', borderColor: target.gender === g ? '#8B0000' : '#16302B' }}>
@@ -200,7 +210,6 @@ export default function UltimateHeritageValentine() {
     </div>
   );
 }
-
 
 const styles: Record<string, React.CSSProperties> = {
   container: { height: "100vh", width: "100vw", display: "flex", alignItems: "center", justifyContent: "center", background: "#fdfbf7", color: "#16302B", fontFamily: "'Playfair Display', serif", overflow: "hidden", position: "relative" },
